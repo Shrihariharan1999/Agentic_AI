@@ -1,0 +1,12 @@
+[submodule "AI_Automation_tester"]
+	path = AI_Automation_tester
+	url = https://github.com/Shrihariharan1999/AI_Automation_tester.git
+[submodule "AI_Code_Interpreter"]
+	path = AI_Code_Interpreter
+	url = https://github.com/Shrihariharan1999/AI_Code_Interpreter.git
+[submodule "AI_File_Handler"]
+	path = AI_File_Handler
+	url = https://github.com/Shrihariharan1999/AI_File_Handler.git
+[submodule "My_first_Agent"]
+	path = My_first_Agent
+	url = https://github.com/Shrihariharan1999/My_first_Agent.git
