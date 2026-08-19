@@ -1,0 +1,45 @@
+{
+  "run_id": "run_14f477df",
+  "target_url": "https://amudham-ayurveda-clinic.vercel.app/",
+  "timestamp": "2026-08-18T19:55:16.855205",
+  "summary": {
+    "total_tests": 4,
+    "passed": 2,
+    "failed": 0,
+    "blocked": 2
+  },
+  "test_cases": [
+    {
+      "id": "TC_1",
+      "title": "Verify Navigation Links",
+      "description": "Test navigation links to ensure they are functional and accessible.",
+      "expected_result": "All navigation links are functional and accessible",
+      "status": "passed",
+      "actual_result": "Test Summary:\nThe test case was executed with the following steps:\n\n1. Navigate to 'https://amudham-ayurveda-clinic.vercel.app/'.\n2. Click on 'a[href='/']'.\n3. Click on 'a[href='/about']'.\n4. Click on 'a[href='/services']'.\n5. Click on 'a[href='/booking']'.\n6. Click on 'a[href='/shop']'.\n7. Click on 'a[href='/contact']'.\n\nThe test case passed all the steps without any errors. The webpage transitions matched the expected results.\n\nTest Result:\nPASSED\n\nActual Final Outcome:\nAll navigation links are functional and accessible."
+    },
+    {
+      "id": "TC_2",
+      "title": "Verify Regular Links",
+      "description": "Test regular links to ensure they are functional and accessible.",
+      "expected_result": "All regular links are functional and accessible",
+      "status": "blocked",
+      "actual_result": "Execution failed due to agent system error: Error code: 500 - {'error': {'message': 'Failed to generate completions: Failed to apply prompt template: invalid operation: This model only supports single tool-calls at once! (in tool_use:95)', 'type': 'Internal Server Error', 'code': 500}}"
+    },
+    {
+      "id": "TC_3",
+      "title": "Verify Buttons",
+      "description": "Test buttons to ensure they are functional and accessible.",
+      "expected_result": "Both buttons are functional and accessible",
+      "status": "blocked",
+      "actual_result": "Execution failed due to agent system error: Error code: 500 - {'error': {'message': 'Failed to generate completions: Failed to apply prompt template: invalid operation: This model only supports single tool-calls at once! (in tool_use:95)', 'type': 'Internal Server Error', 'code': 500}}"
+    },
+    {
+      "id": "TC_4",
+      "title": "Verify Console Errors",
+      "description": "Test console errors to ensure they are resolved.",
+      "expected_result": "The console error message is resolved",
+      "status": "passed",
+      "actual_result": "{\"name\": \"browser_console_messages\", \"parameters\": {\"all\":True,\"level\":\"error\"}}"
+    }
+  ]
+}

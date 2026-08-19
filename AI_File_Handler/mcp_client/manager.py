@@ -1,0 +1,74 @@
+import sys
+from contextlib import AsyncExitStack
+
+from mcp import ClientSession, StdioServerParameters
+from mcp.client.stdio import stdio_client
+from langchain_mcp_adapters.tools import load_mcp_tools
+
+
+class MCPManager:
+
+    def __init__(self):
+        self.sessions = {}
+        self.loaded_tools = None
+        self._stack = AsyncExitStack()
+
+        self.servers = {
+            "filesystem": StdioServerParameters(
+                command=sys.executable,
+                args=[
+                    "-m",
+                    "servers.filesystem.server"
+                ]
+            )
+        }
+
+    async def connect(self):
+        self._stack = AsyncExitStack()
+        self.sessions = {}
+
+        for server_name, server in self.servers.items():
+            client_cm = stdio_client(server)
+            read, write = await self._stack.enter_async_context(client_cm)
+
+            session = ClientSession(read, write)
+            await self._stack.enter_async_context(session)
+            await session.initialize()
+
+            self.sessions[server_name] = session
+
+    async def disconnect(self):
+        try:
+            await self._stack.aclose()
+        except Exception:
+            pass
+        finally:
+            self.sessions = {}
+            self.loaded_tools = None
+
+    async def list_tools(self):
+        all_tools = {}
+
+        for server_name, session in self.sessions.items():
+            result = await session.list_tools()
+            all_tools[server_name] = result.tools
+
+        return all_tools
+
+    async def load_tools(self):
+        if self.loaded_tools is not None:
+            return self.loaded_tools
+
+        session = self.sessions["filesystem"]
+        self.loaded_tools = await load_mcp_tools(session)
+        return self.loaded_tools
+
+    async def call_tool(self, server: str, tool: str, arguments: dict):
+        session = self.sessions[server]
+
+        result = await session.call_tool(tool, arguments)
+
+        if result.isError:
+            raise RuntimeError(result.content[0].text)
+
+        return result.content[0].text

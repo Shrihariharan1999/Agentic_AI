@@ -1,0 +1,53 @@
+{
+  "run_id": "run_6aa6e870",
+  "target_url": "https://amudham-ayurveda-clinic.vercel.app/booking",
+  "timestamp": "2026-08-18T20:02:37.291677",
+  "summary": {
+    "total_tests": 5,
+    "passed": 0,
+    "failed": 0,
+    "blocked": 5
+  },
+  "test_cases": [
+    {
+      "id": "TC_001",
+      "title": "Verify Navigation Links",
+      "description": "Check if all navigation links are functional and redirect to the correct pages",
+      "expected_result": "All navigation links should be functional and redirect to the correct pages",
+      "status": "blocked",
+      "actual_result": "Execution failed due to agent system error: Error code: 500 - {'error': {'message': 'Failed to generate completions: Failed to apply prompt template: invalid operation: This model only supports single tool-calls at once! (in tool_use:95)', 'type': 'Internal Server Error', 'code': 500}}"
+    },
+    {
+      "id": "TC_002",
+      "title": "Verify Regular Links",
+      "description": "Check if all regular links are functional and redirect to the correct pages",
+      "expected_result": "All regular links should be functional and redirect to the correct pages",
+      "status": "blocked",
+      "actual_result": "Execution failed due to agent system error: Error code: 500 - {'error': {'message': 'Failed to generate completions: Failed to apply prompt template: invalid operation: This model only supports single tool-calls at once! (in tool_use:95)', 'type': 'Internal Server Error', 'code': 500}}"
+    },
+    {
+      "id": "TC_003",
+      "title": "Verify Buttons",
+      "description": "Check if all buttons are functional and perform the expected actions",
+      "expected_result": "All buttons should be functional and perform the expected actions",
+      "status": "blocked",
+      "actual_result": "Execution failed due to agent system error: Error code: 500 - {'error': {'message': 'Failed to generate completions: Failed to apply prompt template: invalid operation: This model only supports single tool-calls at once! (in tool_use:95)', 'type': 'Internal Server Error', 'code': 500}}"
+    },
+    {
+      "id": "TC_004",
+      "title": "Verify Input Fields",
+      "description": "Check if all input fields are functional and validate user input",
+      "expected_result": "All input fields should be functional and validate user input",
+      "status": "blocked",
+      "actual_result": "Execution failed due to agent system error: Error code: 500 - {'error': {'message': 'Failed to generate completions: Failed to apply prompt template: invalid operation: This model only supports single tool-calls at once! (in tool_use:95)', 'type': 'Internal Server Error', 'code': 500}}"
+    },
+    {
+      "id": "TC_005",
+      "title": "Verify Form Submission",
+      "description": "Check if the form is submitted successfully and the user is redirected to the correct page",
+      "expected_result": "The form should be submitted successfully and the user should be redirected to the correct page",
+      "status": "blocked",
+      "actual_result": "Execution failed due to agent system error: Error code: 500 - {'error': {'message': 'Failed to generate completions: Failed to apply prompt template: invalid operation: This model only supports single tool-calls at once! (in tool_use:95)', 'type': 'Internal Server Error', 'code': 500}}"
+    }
+  ]
+}

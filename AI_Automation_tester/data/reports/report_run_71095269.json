@@ -1,0 +1,45 @@
+{
+  "run_id": "run_71095269",
+  "target_url": "https://practicetestautomation.com/",
+  "timestamp": "2026-08-18T22:11:33.341047",
+  "summary": {
+    "total_tests": 4,
+    "passed": 0,
+    "failed": 0,
+    "blocked": 4
+  },
+  "test_cases": [
+    {
+      "id": "TC-001",
+      "title": "Verify Home Page Navigation Links",
+      "description": "Verify that all navigation links on the home page are functional and correctly redirect to their respective pages.",
+      "expected_result": "All navigation links are functional and correctly redirect to their respective pages.",
+      "status": "blocked",
+      "actual_result": "Execution failed due to agent system error: Error code: 500 - {'error': {'message': 'Failed to generate completions: Failed to apply prompt template: invalid operation: This model only supports single tool-calls at once! (in tool_use:95)', 'type': 'Internal Server Error', 'code': 500}}"
+    },
+    {
+      "id": "TC-002",
+      "title": "Verify Form Submission",
+      "description": "Verify that the subscription form is submitted correctly and the user receives a confirmation message.",
+      "expected_result": "The subscription form is submitted correctly and the user receives a confirmation message.",
+      "status": "blocked",
+      "actual_result": "Execution failed due to agent system error: Error code: 500 - {'error': {'message': 'Failed to generate completions: Failed to apply prompt template: invalid operation: This model only supports single tool-calls at once! (in tool_use:95)', 'type': 'Internal Server Error', 'code': 500}}"
+    },
+    {
+      "id": "TC-003",
+      "title": "Verify Search Functionality",
+      "description": "Verify that the search functionality works correctly and returns relevant results.",
+      "expected_result": "The search functionality works correctly and returns relevant results.",
+      "status": "blocked",
+      "actual_result": "Execution failed due to agent system error: Error code: 500 - {'error': {'message': 'Failed to generate completions: Failed to apply prompt template: invalid operation: This model only supports single tool-calls at once! (in tool_use:95)', 'type': 'Internal Server Error', 'code': 500}}"
+    },
+    {
+      "id": "TC-004",
+      "title": "Verify Responsive Design",
+      "description": "Verify that the website's responsive design works correctly and displays correctly on different devices.",
+      "expected_result": "The website's responsive design works correctly and displays correctly on different devices.",
+      "status": "blocked",
+      "actual_result": "Execution failed due to agent system error: Error code: 500 - {'error': {'message': 'Failed to generate completions: Failed to apply prompt template: invalid operation: This model only supports single tool-calls at once! (in tool_use:95)', 'type': 'Internal Server Error', 'code': 500}}"
+    }
+  ]
+}

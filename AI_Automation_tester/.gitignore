@@ -1,0 +1,17 @@
+__pycache__/
+*.pyc
+.env
+.env.*
+.vscode/
+.idea/
+pytest_cache/
+
+.venv/
+__pycache__/
+*.pyc
+.env
+.pytest_cache/
+.vscode/
+.idea/
+data/vector_store/
+.playwright-mcp/

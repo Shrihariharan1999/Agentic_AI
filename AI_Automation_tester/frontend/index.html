@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Signal QA | Autonomous AI Web Testing Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/ui/styles.css">
+</head>
+<body class="dark-theme">
+  <!-- Glow Background Effect -->
+  <div class="ambient-glow glow-1"></div>
+  <div class="ambient-glow glow-2"></div>
+
+  <!-- Top Navigation Bar -->
+  <header class="topbar">
+    <div class="topbar-left">
+      <a class="brand" href="/ui/" aria-label="Signal QA Home">
+        <div class="brand-badge">
+          <span class="brand-symbol">⚡</span>
+        </div>
+        <div class="brand-text">
+          <span class="brand-name">SIGNAL<span class="brand-highlight">QA</span></span>
+          <span class="brand-sub">Autonomous Web Testing Studio</span>
+        </div>
+      </a>
+    </div>
+
+    <div class="topbar-center">
+      <div class="session-pill" id="active-session-pill">
+        <span class="pulse-indicator" id="pulse-dot"></span>
+        <span class="session-label" id="session-status-text">Ready for Launch</span>
+      </div>
+    </div>
+
+    <div class="topbar-right">
+      <div class="api-badge" id="api-state-badge">
+        <span class="dot"></span>
+        <span id="api-state-text">API Online</span>
+      </div>
+      <button class="btn btn-secondary btn-sm" id="btn-refresh-all" title="Refresh data">
+        <span class="icon">&#8635;</span> Refresh
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Application Container -->
+  <main class="app-layout">
+    
+    <!-- Hero / Launch & Active Session Status Bar -->
+    <section class="session-hero">
+      <div class="session-info">
+        <div class="target-meta">
+          <span class="meta-tag" id="current-env-tag">DEVELOPMENT</span>
+          <span class="run-id-pill" id="current-run-id-pill">RUN: NONE</span>
+        </div>
+        <h1 class="target-title" id="current-target-title">Select or launch a target website</h1>
+        <p class="target-desc" id="current-target-desc">Autonomous LangGraph pipeline maps interactive DOM elements, designs structured test cases, pauses for human sign-off, executes in Playwright Chromium, and compiles executive summaries.</p>
+      </div>
+
+      <!-- Quick Action Controls -->
+      <div class="session-actions">
+        <form id="quick-launch-form" class="launch-card">
+          <div class="launch-card-header">
+            <span class="card-icon">🚀</span>
+            <h3>Start Autonomous Run</h3>
+          </div>
+          <div class="input-group">
+            <div class="url-input-wrapper">
+              <span class="url-protocol">https://</span>
+              <input id="target-url-input" type="text" placeholder="example.com" required autocomplete="off">
+            </div>
+            <select id="environment-select">
+              <option value="development">Dev</option>
+              <option value="staging">Staging</option>
+              <option value="production">Prod</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block" id="btn-launch-run">
+            <span>Execute Test Pipeline</span>
+            <span class="arrow">&#8594;</span>
+          </button>
+          <div id="form-alert" class="form-alert hidden"></div>
+        </form>
+      </div>
+    </section>
+
+    <!-- Real-time Progress & Pipeline Stepper -->
+    <section class="stepper-section">
+      <div class="progress-header">
+        <div class="progress-stage-info">
+          <span class="stage-eyebrow">ACTIVE STAGE</span>
+          <h4 id="progress-stage-name">System Idle</h4>
+        </div>
+        <div class="progress-stats">
+          <span class="progress-percent" id="progress-percent-label">0%</span>
+        </div>
+      </div>
+      <div class="progress-bar-container">
+        <div class="progress-bar-fill" id="pipeline-progress-bar" style="width: 0%;"></div>
+      </div>
+
+      <!-- Stepper Stages -->
+      <div class="stepper-stages" id="pipeline-stepper">
+        <div class="stage-step" data-step="validate">
+          <div class="step-circle"><span class="step-num">1</span></div>
+          <div class="step-text"><span class="step-title">Validation</span><small>Guardrails</small></div>
+        </div>
+        <div class="stage-step" data-step="discovery">
+          <div class="step-circle"><span class="step-num">2</span></div>
+          <div class="step-text"><span class="step-title">Discovery</span><small>DOM Mapping</small></div>
+        </div>
+        <div class="stage-step" data-step="planning">
+          <div class="step-circle"><span class="step-num">3</span></div>
+          <div class="step-text"><span class="step-title">Planning</span><small>QA Strategy</small></div>
+        </div>
+        <div class="stage-step" data-step="test_generation">
+          <div class="step-circle"><span class="step-num">4</span></div>
+          <div class="step-text"><span class="step-title">Check Writing</span><small>Selectors & Steps</small></div>
+        </div>
+        <div class="stage-step" data-step="human_review">
+          <div class="step-circle"><span class="step-num">5</span></div>
+          <div class="step-text"><span class="step-title">Plan Review</span><small>HITL Approval</small></div>
+        </div>
+        <div class="stage-step" data-step="execution">
+          <div class="step-circle"><span class="step-num">6</span></div>
+          <div class="step-text"><span class="step-title">Execution</span><small>Browser Tests</small></div>
+        </div>
+        <div class="stage-step" data-step="summary">
+          <div class="step-circle"><span class="step-num">7</span></div>
+          <div class="step-text"><span class="step-title">Summary</span><small>Executive Report</small></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HITL Human Sign-Off Banner (Shown only when awaiting review) -->
+    <section class="hitl-banner hidden" id="hitl-review-banner">
+      <div class="hitl-content">
+        <div class="hitl-badge"><span class="hitl-pulse"></span> APPROVAL REQUIRED</div>
+        <h3>Test Plan is Ready for Human Sign-Off</h3>
+        <p>The Planning and Check Writing agents have mapped the target DOM and generated test cases. Review the generated plan below and choose whether to proceed with live browser execution.</p>
+        <div class="hitl-inputs">
+          <input type="text" id="hitl-feedback-input" placeholder="Optional feedback or execution instructions for the agent..." autocomplete="off">
+          <div class="hitl-actions">
+            <button type="button" class="btn btn-danger" id="btn-hitl-reject">Reject Plan</button>
+            <button type="button" class="btn btn-success" id="btn-hitl-approve">Approve &amp; Execute &#8594;</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- KPI Metric Summary Bar -->
+    <section class="kpi-grid">
+      <div class="kpi-card">
+        <span class="kpi-label">TOTAL CASES</span>
+        <span class="kpi-val" id="kpi-total">0</span>
+        <span class="kpi-sub" id="kpi-total-sub">Generated</span>
+      </div>
+      <div class="kpi-card passed">
+        <span class="kpi-label">PASSED</span>
+        <span class="kpi-val text-green" id="kpi-passed">0</span>
+        <span class="kpi-sub">Verified OK</span>
+      </div>
+      <div class="kpi-card failed">
+        <span class="kpi-label">FAILED</span>
+        <span class="kpi-val text-red" id="kpi-failed">0</span>
+        <span class="kpi-sub">Needs Attention</span>
+      </div>
+      <div class="kpi-card blocked">
+        <span class="kpi-label">BLOCKED</span>
+        <span class="kpi-val text-amber" id="kpi-blocked">0</span>
+        <span class="kpi-sub">Unreachable</span>
+      </div>
+      <div class="kpi-card pass-rate">
+        <span class="kpi-label">PASS RATE</span>
+        <span class="kpi-val text-cyan" id="kpi-pass-rate">0%</span>
+        <span class="kpi-sub">Overall Health</span>
+      </div>
+    </section>
+
+    <!-- Main Workspace Tabs -->
+    <section class="workspace-tabs-container">
+      <nav class="tab-nav">
+        <button class="tab-btn active" data-tab="tab-plan">
+          <span class="tab-icon">📋</span> Test Plan &amp; Steps <span class="tab-count-badge" id="badge-plan-count">0</span>
+        </button>
+        <button class="tab-btn" data-tab="tab-execution">
+          <span class="tab-icon">⚡</span> Execution &amp; Evidence <span class="tab-count-badge" id="badge-results-count">0</span>
+        </button>
+        <button class="tab-btn" data-tab="tab-discovery">
+          <span class="tab-icon">🗺️</span> Discovered Map
+        </button>
+        <button class="tab-btn" data-tab="tab-logs">
+          <span class="tab-icon">📟</span> Live Event Stream <span class="tab-count-badge" id="badge-logs-count">0</span>
+        </button>
+        <button class="tab-btn" data-tab="tab-summary">
+          <span class="tab-icon">📊</span> Executive Summary
+        </button>
+        <button class="tab-btn" data-tab="tab-history">
+          <span class="tab-icon">📜</span> Run History
+        </button>
+      </nav>
+
+      <!-- Tab 1: Test Plan & Steps -->
+      <div class="tab-pane active" id="tab-plan">
+        <div class="pane-header">
+          <div>
+            <h3>Generated QA Strategy &amp; Test Suite</h3>
+            <p class="pane-desc">Synthesized by Planner Agent and refined with selectors by Test Writer Agent.</p>
+          </div>
+          <div class="pane-meta">
+            <span class="tag" id="plan-cases-tag">0 Cases Mapped</span>
+          </div>
+        </div>
+
+        <div id="plan-container">
+          <div class="empty-state">
+            <div class="empty-icon">📋</div>
+            <h4>No Test Plan Generated Yet</h4>
+            <p>Enter a target URL above and click "Execute Test Pipeline" to discover elements and generate a structured test plan.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 2: Execution & Evidence -->
+      <div class="tab-pane" id="tab-execution">
+        <div class="pane-header">
+          <div>
+            <h3>Live Test Execution &amp; Evidence Capture</h3>
+            <p class="pane-desc">Sequential test case runs with automated diagnostics, screenshots, and self-healing.</p>
+          </div>
+          <div class="pane-actions">
+            <button class="btn btn-secondary btn-sm" id="btn-export-html-report" style="display:none;">
+              <span>📄 View HTML Report</span>
+            </button>
+          </div>
+        </div>
+
+        <div id="execution-container">
+          <div class="empty-state">
+            <div class="empty-icon">⚡</div>
+            <h4>No Execution Results Available</h4>
+            <p>Once the plan is approved, live browser interactions and screenshot evidence will stream here in real time.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 3: Discovered Site Map -->
+      <div class="tab-pane" id="tab-discovery">
+        <div class="pane-header">
+          <div>
+            <h3>Discovered Interactive Architecture</h3>
+            <p class="pane-desc">DOM elements, navigation anchors, buttons, and form inputs detected by the Discovery Agent.</p>
+          </div>
+        </div>
+
+        <div id="discovery-container">
+          <div class="empty-state">
+            <div class="empty-icon">🗺️</div>
+            <h4>No Discovery Data Yet</h4>
+            <p>Discovery agent will crawl the target page and list all interactive elements here.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 4: Live Event Stream -->
+      <div class="tab-pane" id="tab-logs">
+        <div class="pane-header">
+          <div>
+            <h3>Agent Thought &amp; Action Stream</h3>
+            <p class="pane-desc">Real-time trace logs from LangGraph nodes, agents, and Playwright execution.</p>
+          </div>
+          <div class="pane-actions">
+            <label class="toggle-control">
+              <input type="checkbox" id="autoscroll-toggle" checked>
+              <span>Auto-scroll</span>
+            </label>
+            <button class="btn btn-secondary btn-xs" id="btn-clear-logs">Clear Logs</button>
+          </div>
+        </div>
+
+        <div class="terminal-window">
+          <div class="terminal-header">
+            <span class="term-dot red"></span>
+            <span class="term-dot yellow"></span>
+            <span class="term-dot green"></span>
+            <span class="term-title">signal-qa-runner :: agent-stream.log</span>
+          </div>
+          <div class="terminal-body" id="log-stream-terminal">
+            <div class="log-entry system"><span class="log-time">00:00:00</span> <span class="log-stage">[System]</span> Ready. Awaiting run initialization...</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 5: Executive Summary -->
+      <div class="tab-pane" id="tab-summary">
+        <div class="pane-header">
+          <div>
+            <h3>Executive QA Summary Report</h3>
+            <p class="pane-desc">Consolidated release report generated by Summarizer Agent.</p>
+          </div>
+          <div class="pane-actions">
+            <button class="btn btn-secondary btn-sm" id="btn-copy-summary">
+              <span>📋 Copy Markdown</span>
+            </button>
+            <a class="btn btn-primary btn-sm" id="link-html-report" target="_blank" href="#" style="display: none;">
+              <span>🌐 Open HTML Dashboard</span>
+            </a>
+          </div>
+        </div>
+
+        <div id="summary-container">
+          <div class="empty-state">
+            <div class="empty-icon">📊</div>
+            <h4>Summary Report Pending</h4>
+            <p>The complete Executive Summary with metrics, diagnostics, and recommendations will be rendered here upon run completion.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 6: Run History -->
+      <div class="tab-pane" id="tab-history">
+        <div class="pane-header">
+          <div>
+            <h3>Session History</h3>
+            <p class="pane-desc">Previous test runs recorded in memory and database.</p>
+          </div>
+          <div class="pane-actions">
+            <button class="btn btn-secondary btn-sm" id="btn-refresh-history">
+              <span>&#8635; Refresh</span>
+            </button>
+          </div>
+        </div>
+
+        <div id="history-container">
+          <div class="empty-state">
+            <div class="empty-icon">📜</div>
+            <h4>No Previous Runs Found</h4>
+            <p>Launched test runs will be recorded here for instant replay and inspection.</p>
+          </div>
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <!-- Image Lightbox Modal for Screenshots -->
+  <div class="lightbox-modal hidden" id="image-lightbox">
+    <div class="lightbox-backdrop" id="lightbox-backdrop"></div>
+    <div class="lightbox-content">
+      <button class="lightbox-close" id="lightbox-close">&times;</button>
+      <img id="lightbox-img" src="" alt="Test Screenshot Preview">
+      <div class="lightbox-caption" id="lightbox-caption">Screenshot preview</div>
+    </div>
+  </div>
+
+  <footer class="app-footer">
+    <div class="footer-left">
+      <span>Signal QA Autonomous Testing Studio</span>
+      <span class="separator">&bull;</span>
+      <span>Authorized Security &amp; QA Verification Only</span>
+    </div>
+    <div class="footer-right">
+      <span id="footer-status-pill">System Online</span>
+    </div>
+  </footer>
+
+  <script src="/ui/app.js"></script>
+</body>
+</html>
