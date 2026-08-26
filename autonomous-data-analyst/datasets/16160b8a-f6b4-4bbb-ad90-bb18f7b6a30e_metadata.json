@@ -1,0 +1,26 @@
+{
+  "dataset_id": "16160b8a-f6b4-4bbb-ad90-bb18f7b6a30e",
+  "session_id": "62159821-d61b-4d46-b403-51a3935b6434",
+  "dataset_name": "Churn_Modelling.csv",
+  "version": 1,
+  "rows": 10000,
+  "columns": [
+    "RowNumber",
+    "CustomerId",
+    "Surname",
+    "CreditScore",
+    "Geography",
+    "Gender",
+    "Age",
+    "Tenure",
+    "Balance",
+    "NumOfProducts",
+    "HasCrCard",
+    "IsActiveMember",
+    "EstimatedSalary",
+    "Exited"
+  ],
+  "column_count": 14,
+  "duplicate_rows": 0,
+  "metadata": "Dataset Name: Churn_Modelling.csv\nRows: 10000\nColumns: 14\nDuplicate Rows: 0\nColumns and Data Types:\n- RowNumber: int64\n- CustomerId: int64\n- Surname: str\n- CreditScore: int64\n- Geography: str\n- Gender: str\n- Age: int64\n- Tenure: int64\n- Balance: float64\n- NumOfProducts: int64\n- HasCrCard: int64\n- IsActiveMember: int64\n- EstimatedSalary: float64\n- Exited: int64\nMissing Values:\n- None"
+}

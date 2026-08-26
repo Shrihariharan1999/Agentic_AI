@@ -1,0 +1,28 @@
+{
+  "dataset_id": "593a69e0-de45-4565-8359-1a6ed71a381c",
+  "session_id": "c098875a-2ee9-4586-ad98-5a529b6e882f",
+  "dataset_name": "Titanic.csv",
+  "version": 1,
+  "rows": 891,
+  "columns": [
+    "Unnamed: 0",
+    "survived",
+    "pclass",
+    "sex",
+    "age",
+    "sibsp",
+    "parch",
+    "fare",
+    "embarked",
+    "class",
+    "who",
+    "adult_male",
+    "deck",
+    "embark_town",
+    "alive",
+    "alone"
+  ],
+  "column_count": 16,
+  "duplicate_rows": 0,
+  "metadata": "Dataset Name: Titanic.csv\nRows: 891\nColumns: 16\nDuplicate Rows: 0\nColumns and Data Types:\n- Unnamed: 0: int64\n- survived: int64\n- pclass: int64\n- sex: str\n- age: float64\n- sibsp: int64\n- parch: int64\n- fare: float64\n- embarked: str\n- class: str\n- who: str\n- adult_male: bool\n- deck: str\n- embark_town: str\n- alive: str\n- alone: bool\nMissing Values:\n- age: 177\n- embarked: 2\n- deck: 688\n- embark_town: 2"
+}

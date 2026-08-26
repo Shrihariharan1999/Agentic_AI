@@ -1,0 +1,28 @@
+{
+  "dataset_id": "ac820a07-24c0-4636-8ec1-1f560244eed3",
+  "session_id": "c098875a-2ee9-4586-ad98-5a529b6e882f",
+  "dataset_name": "heart_disease_dataset.csv",
+  "version": 2,
+  "rows": 1000,
+  "columns": [
+    "Age",
+    "Gender",
+    "Cholesterol",
+    "Blood Pressure",
+    "Heart Rate",
+    "Smoking",
+    "Alcohol Intake",
+    "Exercise Hours",
+    "Family History",
+    "Diabetes",
+    "Obesity",
+    "Stress Level",
+    "Blood Sugar",
+    "Exercise Induced Angina",
+    "Chest Pain Type",
+    "Heart Disease"
+  ],
+  "column_count": 16,
+  "duplicate_rows": 0,
+  "metadata": "Dataset Name: heart_disease_dataset.csv\nRows: 1000\nColumns: 16\nDuplicate Rows: 0\nColumns and Data Types:\n- Age: int64\n- Gender: str\n- Cholesterol: int64\n- Blood Pressure: int64\n- Heart Rate: int64\n- Smoking: str\n- Alcohol Intake: str\n- Exercise Hours: int64\n- Family History: str\n- Diabetes: str\n- Obesity: str\n- Stress Level: int64\n- Blood Sugar: int64\n- Exercise Induced Angina: str\n- Chest Pain Type: str\n- Heart Disease: int64\nMissing Values:\n- Alcohol Intake: 340"
+}

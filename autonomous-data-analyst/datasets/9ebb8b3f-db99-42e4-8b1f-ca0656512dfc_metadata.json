@@ -1,0 +1,18 @@
+{
+  "dataset_id": "9ebb8b3f-db99-42e4-8b1f-ca0656512dfc",
+  "session_id": "1676f081-3ba5-4ccc-a181-04a691a58efb",
+  "dataset_name": "Student_Performance.csv",
+  "version": 1,
+  "rows": 10000,
+  "columns": [
+    "Hours Studied",
+    "Previous Scores",
+    "Extracurricular Activities",
+    "Sleep Hours",
+    "Sample Question Papers Practiced",
+    "Performance Index"
+  ],
+  "column_count": 6,
+  "duplicate_rows": 127,
+  "metadata": "Dataset Name: Student_Performance.csv\nRows: 10000\nColumns: 6\nDuplicate Rows: 127\nColumns and Data Types:\n- Hours Studied: int64\n- Previous Scores: int64\n- Extracurricular Activities: str\n- Sleep Hours: int64\n- Sample Question Papers Practiced: int64\n- Performance Index: float64\nMissing Values:\n- None"
+}

@@ -1,0 +1,963 @@
+﻿<style>
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+/* Global Reset & Base App Styling */
+html, body, .stApp, [data-testid="stAppViewContainer"], .main {
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif !important;
+    background-color: #0f172a !important;
+    color: #f8fafc !important;
+}
+
+code, pre {
+    font-family: 'JetBrains Mono', monospace !important;
+}
+
+/* Streamlit Header, Menu, Deploy Button & Footer Adjustments */
+#MainMenu, 
+footer, 
+.stDeployButton, 
+[data-testid="stDeployButton"],
+[data-testid="stDecoration"],
+[data-testid="stHeaderActionElements"] button:not([data-testid="stSidebarCollapseButton"]):not([data-testid="stSidebarCollapsedControl"]) {
+    visibility: hidden !important;
+    display: none !important;
+}
+
+header[data-testid="stHeader"] {
+    background: transparent !important;
+    z-index: 100 !important;
+    pointer-events: auto !important;
+}
+
+/* ------------------------------------------------------------------------- */
+/* Sidebar & Toggle Button Clean Slate Styling (Crisp <<< Arrow)             */
+/* ------------------------------------------------------------------------- */
+[data-testid="stSidebarCollapseButton"],
+[data-testid="stSidebarCollapsedControl"],
+[data-testid="collapsedControl"],
+[data-testid="stExpandSidebarButton"] {
+    visibility: visible !important;
+    display: flex !important;
+    z-index: 99999 !important;
+}
+
+[data-testid="stSidebarCollapseButton"] button,
+[data-testid="stSidebarCollapsedControl"] button,
+button[data-testid="stSidebarCollapseButton"],
+button[kind="header"],
+[data-testid="stExpandSidebarButton"] {
+    background-color: #1e293b !important;
+    border: 1px solid rgba(148, 163, 184, 0.35) !important;
+    border-radius: 8px !important;
+    color: #cbd5e1 !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4) !important;
+    padding: 6px !important;
+    transition: all 0.2s ease !important;
+}
+
+[data-testid="stSidebarCollapseButton"] button:hover,
+[data-testid="stSidebarCollapsedControl"] button:hover,
+button[data-testid="stSidebarCollapseButton"]:hover,
+[data-testid="stExpandSidebarButton"]:hover {
+    background-color: #334155 !important;
+    border-color: #818cf8 !important;
+    color: #ffffff !important;
+    transform: scale(1.05) !important;
+}
+
+[data-testid="stSidebarCollapseButton"] svg,
+[data-testid="stSidebarCollapsedControl"] svg,
+button[data-testid="stSidebarCollapseButton"] svg,
+[data-testid="stExpandSidebarButton"] svg {
+    fill: #cbd5e1 !important;
+    stroke: #cbd5e1 !important;
+    color: #cbd5e1 !important;
+    width: 20px !important;
+    height: 20px !important;
+}
+
+[data-testid="stBaseButton-headerNoPadding"] span,
+[data-testid="stBaseButton-headerNoPadding"] svg,
+[data-testid="stExpandSidebarButton"] span,
+[data-testid="stExpandSidebarButton"] svg {
+    color: #ffffff !important;
+    fill: #ffffff !important;
+    stroke: #ffffff !important;
+    opacity: 1 !important;
+}
+
+[data-testid="stBaseButton-headerNoPadding"] {
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif !important;
+}
+
+[data-testid="stExpandSidebarButton"] {
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif !important;
+}
+
+[data-testid="stBaseButton-headerNoPadding"] [data-testid="stIconMaterial"],
+[data-testid="stExpandSidebarButton"] [data-testid="stIconMaterial"] {
+    font-family: 'Material Symbols Rounded', 'Material Icons', sans-serif !important;
+}
+
+section[data-testid="stSidebar"],
+[data-testid="stSidebar"] {
+    background-color: #0b1120 !important;
+    border-right: 1px solid rgba(148, 163, 184, 0.15) !important;
+}
+
+[data-testid="stSidebarContent"],
+[data-testid="stSidebarUserContent"] {
+    background-color: #0b1120 !important;
+    padding-top: 1rem !important;
+}
+
+.sidebar-brand-card {
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.8) 0%, rgba(15, 23, 42, 0.9) 100%);
+    border: 1px solid rgba(148, 163, 184, 0.15);
+    border-radius: 14px;
+    padding: 1rem 1.15rem;
+    margin-bottom: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    box-shadow: 0 4px 15px -2px rgba(0, 0, 0, 0.3);
+}
+
+.sidebar-brand-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    box-shadow: 0 0 10px rgba(99, 102, 241, 0.35);
+}
+
+.sidebar-brand-text {
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: -0.01em;
+}
+
+.sidebar-brand-subtitle {
+    font-size: 0.72rem;
+    color: #94a3b8;
+}
+
+.sidebar-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1.25rem 0 0.5rem 0;
+    padding: 0 0.2rem;
+}
+
+.sidebar-section-title {
+    font-size: 0.72rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #94a3b8;
+}
+
+.sidebar-count-badge {
+    font-size: 0.7rem;
+    font-weight: 700;
+    background: rgba(99, 102, 241, 0.15);
+    color: #818cf8;
+    padding: 0.15rem 0.5rem;
+    border-radius: 9999px;
+    border: 1px solid rgba(99, 102, 241, 0.25);
+}
+
+/* Sidebar Action Buttons */
+[data-testid="stSidebar"] .stButton>button {
+    background-color: #131d2e !important;
+    border: 1px solid rgba(148, 163, 184, 0.15) !important;
+    border-radius: 10px !important;
+    color: #cbd5e1 !important;
+    font-size: 0.88rem !important;
+    padding: 0.5rem 0.85rem !important;
+    text-align: left !important;
+    display: flex !important;
+    justify-content: flex-start !important;
+}
+
+[data-testid="stSidebar"] .stButton>button:hover {
+    background-color: #1e293b !important;
+    border-color: #6366f1 !important;
+    color: #ffffff !important;
+    transform: translateX(2px) !important;
+}
+
+/* Capability Tags Card in Sidebar (Larger Icons & Chips) */
+.capability-footer-card {
+    background: #0d1527;
+    border: 1px solid rgba(148, 163, 184, 0.16);
+    border-radius: 14px;
+    padding: 1rem 1.1rem;
+    margin-top: 1.25rem;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+}
+
+.capability-heading {
+    font-size: 0.78rem;
+    font-weight: 800;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.capability-chip-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.65rem;
+}
+
+.cap-chip {
+    font-size: 0.86rem;
+    font-weight: 600;
+    background: rgba(148, 163, 184, 0.1);
+    color: #f1f5f9;
+    padding: 0.35rem 0.7rem;
+    border-radius: 8px;
+    border: 1px solid rgba(148, 163, 184, 0.18);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    transition: all 0.2s ease;
+}
+
+.cap-chip:hover {
+    background: rgba(99, 102, 241, 0.18);
+    border-color: #818cf8;
+    color: #ffffff;
+    transform: translateY(-1px);
+}
+
+.cap-chip .chip-icon {
+    font-size: 1.2rem;
+    line-height: 1;
+}
+
+/* ------------------------------------------------------------------------- */
+/* Clean Top Header & Layout Spacing                                         */
+/* ------------------------------------------------------------------------- */
+.app-header-clean {
+    background: linear-gradient(135deg, rgba(22, 32, 50, 0.85) 0%, rgba(15, 23, 42, 0.9) 100%);
+    border: 1px solid rgba(148, 163, 184, 0.15);
+    border-radius: 16px;
+    padding: 1.1rem 1.5rem;
+    margin-bottom: 1.25rem;
+    box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.25);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.header-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+}
+
+.header-title {
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+}
+
+.header-subtitle {
+    font-size: 0.8rem;
+    color: #94a3b8;
+    margin: 0.2rem 0 0 0;
+}
+
+.dataset-section-header {
+    margin-top: 1.25rem;
+}
+
+[data-testid="stMainBlockContainer"],
+.main .block-container {
+    padding-top: 1.25rem !important;
+    padding-bottom: 6rem !important;
+}
+
+.brand-logo {
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    box-shadow: 0 0 14px rgba(99, 102, 241, 0.35);
+}
+
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.35rem 0.85rem;
+    border-radius: 9999px;
+    font-size: 0.78rem;
+    font-weight: 600;
+}
+
+.status-badge.online {
+    background: rgba(16, 185, 129, 0.12);
+    color: #34d399;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.status-badge.offline {
+    background: rgba(239, 68, 68, 0.12);
+    color: #f87171;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.status-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background-color: currentColor;
+    box-shadow: 0 0 8px currentColor;
+}
+
+/* ------------------------------------------------------------------------- */
+/* Dataset Stats Floating Bar                                                */
+/* ------------------------------------------------------------------------- */
+.dataset-banner {
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.9) 0%, rgba(15, 23, 42, 0.9) 100%);
+    border: 1px solid rgba(99, 102, 241, 0.25);
+    border-radius: 16px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 6px 20px -2px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.dataset-info-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.dataset-icon-wrap {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: rgba(99, 102, 241, 0.15);
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+}
+
+.dataset-name-text {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #ffffff;
+    margin: 0;
+}
+
+.dataset-sub-text {
+    color: #94a3b8;
+    font-size: 0.82rem;
+    margin: 0.15rem 0 0 0;
+}
+
+.dataset-metrics-row {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.mini-stat {
+    text-align: right;
+}
+
+.mini-stat-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    color: #94a3b8;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+}
+
+.mini-stat-val {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: #a5b4fc;
+}
+
+/* Bento Hero Empty State */
+.bento-hero {
+    text-align: center;
+    padding: 2.5rem 1rem 1.5rem 1rem;
+}
+
+.hero-heading {
+    font-size: 2.1rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: #f8fafc;
+    margin-bottom: 0.5rem;
+}
+
+.hero-subheading {
+    color: #94a3b8;
+    font-size: 1.05rem;
+    max-width: 600px;
+    margin: 0 auto 2rem auto;
+    line-height: 1.5;
+}
+
+.chat-bubble-marker {
+    display: none;
+}
+
+.report-showcase {
+    margin-bottom: 1rem;
+}
+
+.report-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    gap: 0.75rem;
+}
+
+.report-title-wrap {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    min-width: 0;
+}
+
+.report-icon {
+    font-size: 1.3rem;
+}
+
+.report-filename {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #ffffff;
+    overflow-wrap: anywhere;
+}
+
+.report-description {
+    color: #cbd5e1;
+    font-size: 0.88rem;
+    margin: 0;
+}
+
+/* ------------------------------------------------------------------------- */
+/* Conversational Chat Bubbles (User on LEFT [Purple], AI on RIGHT [Slate])  */
+/* ------------------------------------------------------------------------- */
+[data-testid="stChatMessage"] {
+    padding: 1.1rem 1.4rem !important;
+    margin-bottom: 1.25rem !important;
+    transition: all 0.2s ease !important;
+}
+
+/* User Message (Left-Aligned Bubble, Matte Indigo/Purple Finish, Not Shiny) */
+[data-testid="stChatMessage"]:has(.chat-bubble-marker-user),
+[data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarUser"]) {
+    margin-left: 0 !important;
+    margin-right: auto !important;
+    max-width: 78% !important;
+    width: fit-content !important;
+    background: linear-gradient(135deg, #1e1b4b 0%, #2e1065 60%, #1e1b4b 100%) !important;
+    border: 1px solid rgba(139, 92, 246, 0.35) !important;
+    border-radius: 20px 20px 20px 4px !important;
+    flex-direction: row !important;
+    box-shadow: 0 4px 18px rgba(99, 102, 241, 0.18) !important;
+}
+
+[data-testid="stChatMessage"]:has(.chat-bubble-marker-user) [data-testid="stChatMessageAvatar"],
+[data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarUser"]) [data-testid="stChatMessageAvatar"] {
+    margin-right: 0.85rem !important;
+    margin-left: 0 !important;
+    background: #1e1b4b !important;
+    border: 1px solid rgba(139, 92, 246, 0.35) !important;
+    box-shadow: none !important;
+    color: #e2e8f0 !important;
+}
+
+[data-testid="stChatMessage"]:has(.chat-bubble-marker-user) [data-testid="stChatMessageAvatar"] svg,
+[data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarUser"]) [data-testid="stChatMessageAvatar"] svg {
+    fill: #cbd5e1 !important;
+    color: #cbd5e1 !important;
+}
+
+[data-testid="stChatMessage"]:has(.chat-bubble-marker-user) [data-testid="stChatMessageContent"],
+[data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarUser"]) [data-testid="stChatMessageContent"] {
+    text-align: left !important;
+}
+
+/* Chatbot / Assistant Message (Right-Aligned Bubble, Classic Slate Dark) */
+[data-testid="stChatMessage"]:has(.chat-bubble-marker-assistant),
+[data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarAssistant"]) {
+    margin-left: auto !important;
+    margin-right: 0 !important;
+    max-width: 86% !important;
+    background: linear-gradient(135deg, #162032 0%, #0f172a 100%) !important;
+    border: 1px solid rgba(148, 163, 184, 0.2) !important;
+    border-radius: 20px 20px 4px 20px !important;
+    flex-direction: row-reverse !important;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35) !important;
+}
+
+[data-testid="stChatMessage"]:has(.chat-bubble-marker-assistant) [data-testid="stChatMessageAvatar"],
+[data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarAssistant"]) [data-testid="stChatMessageAvatar"] {
+    margin-left: 0.85rem !important;
+    margin-right: 0 !important;
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%) !important;
+    border: 1px solid rgba(199, 210, 254, 0.4) !important;
+    box-shadow: 0 0 12px rgba(99, 102, 241, 0.35) !important;
+}
+
+[data-testid="stChatMessage"] p,
+[data-testid="stChatMessage"] span,
+[data-testid="stChatMessage"] li,
+[data-testid="stChatMessage"] div,
+[data-testid="stChatMessage"] td,
+[data-testid="stChatMessage"] th {
+    color: #f1f5f9 !important;
+    font-size: 0.98rem !important;
+    line-height: 1.65 !important;
+}
+
+[data-testid="stChatMessage"] strong,
+[data-testid="stChatMessage"] b {
+    color: #ffffff !important;
+    font-weight: 700 !important;
+}
+
+[data-testid="stChatMessage"] h1,
+[data-testid="stChatMessage"] h2,
+[data-testid="stChatMessage"] h3,
+[data-testid="stChatMessage"] h4 {
+    color: #ffffff !important;
+    font-weight: 700 !important;
+    margin-top: 0.75rem !important;
+    margin-bottom: 0.5rem !important;
+}
+
+[data-testid="stChatMessage"] code {
+    background-color: #0b1120 !important;
+    color: #a5b4fc !important;
+    padding: 2px 6px !important;
+    border-radius: 4px !important;
+    border: 1px solid rgba(148, 163, 184, 0.15) !important;
+}
+
+[data-testid="stChatMessage"] pre {
+    background-color: #0b1120 !important;
+    border: 1px solid rgba(148, 163, 184, 0.15) !important;
+    border-radius: 10px !important;
+}
+
+[data-testid="stChatMessage"] table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    background-color: #182234 !important;
+    border-radius: 8px !important;
+    overflow: hidden !important;
+    margin: 1rem 0 !important;
+}
+
+[data-testid="stChatMessage"] th {
+    background-color: #0b1120 !important;
+    color: #cbd5e1 !important;
+    font-weight: 700 !important;
+    padding: 0.6rem 0.8rem !important;
+    border: 1px solid #334155 !important;
+}
+
+[data-testid="stChatMessage"] td {
+    padding: 0.5rem 0.8rem !important;
+    border: 1px solid #334155 !important;
+}
+
+/* Chat Avatar Styling */
+[data-testid="stChatMessageAvatar"] {
+    display: flex !important;
+    visibility: visible !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-width: 40px !important;
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 12px !important;
+    font-size: 1.3rem !important;
+}
+
+[data-testid="stChatMessageAvatar"] div,
+[data-testid="stChatMessageAvatar"] span {
+    font-size: 1.3rem !important;
+    line-height: 1 !important;
+    color: #ffffff !important;
+}
+
+[data-testid="stChatMessageAvatar"] svg {
+    fill: #818cf8 !important;
+    color: #818cf8 !important;
+    width: 22px !important;
+    height: 22px !important;
+}
+
+/* ------------------------------------------------------------------------- */
+/* Global Button Dark Styling                                                */
+/* ------------------------------------------------------------------------- */
+button,
+button[kind="secondary"],
+button[kind="primary"],
+[data-testid="stBaseButton-secondary"],
+[data-testid="stBaseButton-primary"],
+.stButton>button {
+    background-color: #1e293b !important;
+    background: #1e293b !important;
+    border: 1px solid rgba(148, 163, 184, 0.2) !important;
+    color: #f8fafc !important;
+    border-radius: 10px !important;
+    font-weight: 600 !important;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+button:hover,
+button[kind="secondary"]:hover,
+[data-testid="stBaseButton-secondary"]:hover,
+.stButton>button:hover {
+    background-color: #334155 !important;
+    background: #334155 !important;
+    border-color: #818cf8 !important;
+    color: #ffffff !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 14px rgba(99, 102, 241, 0.25) !important;
+}
+
+/* File Uploader Dark Styling & Ultra-Visible Instructions */
+[data-testid*="FileUploader"],
+[data-testid*="fileUploader"],
+[data-testid*="FileUpload"],
+[data-testid*="file-uploader"],
+[data-baseweb="file-uploader"] {
+    background-color: #131d2e !important;
+    background: #131d2e !important;
+    border-radius: 12px !important;
+}
+
+section[data-testid*="FileUploader"],
+section[data-testid*="FileUpload"],
+div[data-testid*="FileUploaderDropzone"],
+div[data-testid*="FileUploadDropzone"],
+section[data-testid*="Dropzone"] {
+    background-color: #131d2e !important;
+    background: #131d2e !important;
+    border: 1px dashed rgba(148, 163, 184, 0.4) !important;
+    border-radius: 12px !important;
+    padding: 1.1rem !important;
+}
+
+/* Force ALL text inside File Uploader to be Bright Crisp White / Slate */
+[data-testid*="FileUploader"] *,
+[data-testid*="FileUpload"] *,
+[data-testid*="file-uploader"] *,
+[data-testid*="Dropzone"] *,
+[data-testid="stFileUploaderDropzoneInstructions"],
+[data-testid="stFileUploaderDropzoneInstructions"] *,
+[data-testid="stFileUploaderDropzoneInstructions"] small,
+[data-testid="stFileUploaderDropzoneInstructions"] span,
+[data-testid="stFileUploaderDropzoneInstructions"] div {
+    color: #f1f5f9 !important;
+    opacity: 1 !important;
+    font-weight: 500 !important;
+}
+
+/* Specific highlight for '200MB per file • CSV, XLSX' helper text */
+[data-testid*="FileUploader"] small,
+[data-testid*="FileUpload"] small,
+[data-testid*="Dropzone"] small,
+[data-testid="stFileUploaderDropzoneInstructions"] small,
+[data-testid="stFileUploaderDropzoneInstructions"] span {
+    color: #cbd5e1 !important;
+    font-size: 0.85rem !important;
+    font-weight: 600 !important;
+    opacity: 1 !important;
+}
+
+/* Upload Button inside Dropzone */
+[data-testid*="FileUploader"] button,
+[data-testid*="FileUpload"] button,
+[data-testid*="Dropzone"] button {
+    background-color: #1e293b !important;
+    background: #1e293b !important;
+    color: #ffffff !important;
+    border: 1px solid rgba(148, 163, 184, 0.35) !important;
+    border-radius: 8px !important;
+    font-weight: 700 !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+}
+
+[data-testid*="FileUploader"] button:hover,
+[data-testid*="FileUpload"] button:hover {
+    background-color: #334155 !important;
+    border-color: #818cf8 !important;
+    color: #ffffff !important;
+}
+
+/* =====================================================================
+    Uploaded File Pill - keep the native uploader result readable on dark UI
+    ===================================================================== */
+section[data-testid="stSidebar"] ul li,
+section[data-testid="stSidebar"] ul li > *,
+section[data-testid="stSidebar"] ul li div,
+section[data-testid="stSidebar"] ul li span,
+section[data-testid="stSidebar"] ul li p,
+section[data-testid="stSidebar"] ul li small,
+section[data-testid="stSidebar"] ul li label {
+    background-color: #1e293b !important;
+    color: #f1f5f9 !important;
+    opacity: 1 !important;
+}
+
+section[data-testid="stSidebar"] ul li * {
+    background-color: #1e293b !important;
+    background: #1e293b !important;
+    color: #f1f5f9 !important;
+}
+
+section[data-testid="stSidebar"] ul li button {
+    background-color: #334155 !important;
+    background: #334155 !important;
+    color: #f8fafc !important;
+}
+
+section[data-testid="stSidebar"] [data-testid="stFileChip"],
+section[data-testid="stSidebar"] [data-testid="stFileChip"] *,
+section[data-testid="stSidebar"] [data-testid="stFileChip"] button {
+    background-color: #1e293b !important;
+    background: #1e293b !important;
+    color: #f1f5f9 !important;
+    opacity: 1 !important;
+}
+
+section[data-testid="stSidebar"] [data-testid="stFileChip"] button {
+    background-color: #334155 !important;
+    background: #334155 !important;
+    color: #ffffff !important;
+}
+
+/* Make file size text slightly muted but still dark and readable */
+section[data-testid="stSidebar"] ul li small,
+section[data-testid="stSidebar"] ul li span:last-child {
+    color: #cbd5e1 !important;
+    font-weight: 500 !important;
+}
+
+.uploaded-file-card {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    margin-top: 0.7rem;
+    padding: 0.65rem 0.75rem;
+    background: #1e293b;
+    border: 1px solid rgba(99, 102, 241, 0.45);
+    border-radius: 10px;
+    color: #f8fafc;
+    overflow-wrap: anywhere;
+}
+
+.uploaded-file-card .file-name {
+    color: #ffffff;
+    font-size: 0.82rem;
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+.uploaded-file-card .file-status {
+    color: #a5b4fc;
+    font-size: 0.7rem;
+    margin-top: 0.15rem;
+}
+
+/* Status Widget & Search Buffering Box Dark Styling */
+[data-testid="stStatusWidget"],
+div[data-testid="stStatusWidget"],
+[data-testid="stStatusWidget"] > details,
+div[data-testid="stStatusWidget"] > div {
+    background-color: #131d2e !important;
+    background: #131d2e !important;
+    border: 1px solid rgba(99, 102, 241, 0.25) !important;
+    border-radius: 12px !important;
+    color: #f8fafc !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35) !important;
+}
+
+[data-testid="stStatusWidget"] summary {
+    background-color: #1a273e !important;
+    background: #1a273e !important;
+    border-radius: 10px !important;
+    color: #ffffff !important;
+    font-weight: 600 !important;
+    padding: 0.65rem 1rem !important;
+    border: 1px solid rgba(148, 163, 184, 0.15) !important;
+}
+
+[data-testid="stStatusWidget"] summary:hover {
+    background-color: #22324f !important;
+    color: #a5b4fc !important;
+}
+
+[data-testid="stStatusWidget"] [data-testid="stExpanderDetails"] {
+    background-color: #131d2e !important;
+    border-top: 1px solid rgba(148, 163, 184, 0.15) !important;
+    padding: 0.85rem 1rem !important;
+    color: #cbd5e1 !important;
+}
+
+[data-testid="stStatusWidget"] [data-testid="stExpanderDetails"] p,
+[data-testid="stStatusWidget"] [data-testid="stExpanderDetails"] span,
+[data-testid="stStatusWidget"] [data-testid="stExpanderDetails"] div {
+    color: #cbd5e1 !important;
+}
+
+/* Streamlit Spinner Styling (Fix White Box & Colors) */
+[data-testid="stSpinner"],
+div[data-testid="stSpinner"],
+.stSpinner {
+    background-color: #131d2e !important;
+    background: #131d2e !important;
+    border: 1px solid rgba(148, 163, 184, 0.2) !important;
+    border-radius: 10px !important;
+    padding: 0.75rem 1.25rem !important;
+    color: #f1f5f9 !important;
+    margin: 0.5rem 0 !important;
+}
+
+[data-testid="stSpinner"] > div {
+    border-color: #818cf8 transparent #818cf8 transparent !important;
+}
+
+[data-testid="stSpinner"] span,
+[data-testid="stSpinner"] p,
+.stSpinner span {
+    color: #f1f5f9 !important;
+    font-weight: 500 !important;
+}
+
+/* Expander Dark Styling */
+[data-testid="stExpander"],
+details[data-testid="stExpander"] {
+    background-color: #131d2e !important;
+    background: #131d2e !important;
+    border: 1px solid rgba(148, 163, 184, 0.2) !important;
+    border-radius: 12px !important;
+    margin: 0.75rem 0 !important;
+}
+
+[data-testid="stExpander"] summary {
+    background-color: #1a273e !important;
+    color: #f1f5f9 !important;
+    border-radius: 10px !important;
+    font-weight: 600 !important;
+    padding: 0.65rem 1rem !important;
+}
+
+[data-testid="stExpander"] summary:hover {
+    background-color: #22324f !important;
+    color: #a5b4fc !important;
+}
+
+[data-testid="stExpander"] [data-testid="stExpanderDetails"] {
+    background-color: #131d2e !important;
+    color: #cbd5e1 !important;
+    border-top: 1px solid rgba(148, 163, 184, 0.15) !important;
+    padding: 1rem !important;
+}
+
+/* Chat Input Bar Fix */
+[data-testid="stBottom"],
+[data-testid="stBottomBlockContainer"],
+.stChatFloatingInputContainer {
+    background-color: #0f172a !important;
+    background: #0f172a !important;
+}
+
+[data-testid="stBottom"] > div {
+    background-color: transparent !important;
+}
+
+[data-testid="stChatInput"],
+[data-testid="stChatInput"] > div,
+[data-testid="stChatInputContainer"],
+.stChatInputContainer,
+[data-baseweb="base-input"],
+[data-baseweb="input"],
+div[data-baseweb="base-input"],
+div[data-baseweb="input"] {
+    background-color: #1e293b !important;
+    background: #1e293b !important;
+    border: 1px solid rgba(148, 163, 184, 0.25) !important;
+    border-radius: 14px !important;
+    color: #ffffff !important;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35) !important;
+}
+
+[data-testid="stChatInput"]:focus-within,
+.stChatInputContainer:focus-within {
+    border-color: #6366f1 !important;
+    box-shadow: 0 0 16px rgba(99, 102, 241, 0.35) !important;
+}
+
+[data-testid="stChatInput"] textarea,
+[data-testid="stChatInputTextArea"],
+.stChatInput textarea,
+textarea[data-testid="stChatInputTextArea"] {
+    background-color: transparent !important;
+    background: transparent !important;
+    color: #ffffff !important;
+    caret-color: #818cf8 !important;
+    font-size: 0.95rem !important;
+}
+
+[data-testid="stChatInput"] textarea::placeholder,
+.stChatInput textarea::placeholder {
+    color: #94a3b8 !important;
+}
+
+[data-testid="stChatInputSubmitButton"] button {
+    color: #818cf8 !important;
+    background: transparent !important;
+    border: none !important;
+}
+
+[data-testid="stChatInputSubmitButton"] button:hover {
+    color: #a5b4fc !important;
+    background: rgba(99, 102, 241, 0.15) !important;
+}
+</style>
